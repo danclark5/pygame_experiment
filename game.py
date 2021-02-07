@@ -31,9 +31,18 @@ def main():
     pygame.display.flip()
 
     clock = pygame.time.Clock()
-    going = True
-    while going:
+    running = True
+    while running:
         clock.tick(60)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                running = False
+
+        screen.blit(background, (0, 0))
+        pygame.display.flip()
 
     pygame.quit()
 
