@@ -12,6 +12,27 @@ class Drew(pygame.sprite.Sprite):
         pass
 
     def walk(self, walk_values):
-        self.position[0] += walk_values[0]
-        self.position[1] += walk_values[1]
+        for key, distance in walk_values.items():
+            self.call_walk(key, distance)
+
+    def call_walk(self, key, distance):
+        walk_call = {
+            pygame.K_w: self.walk_north, \
+            pygame.K_d: self.walk_east, \
+            pygame.K_s: self.walk_south, \
+            pygame.K_a: self.walk_west}
+
+        walk_call[key](distance)
+
+    def walk_north(self, distance):
+        self.position[1] -= distance
+
+    def walk_south(self, distance):
+        self.position[1] += distance
+
+    def walk_east(self, distance):
+        self.position[0] += distance
+
+    def walk_west(self, distance):
+        self.position[0] -= distance
 

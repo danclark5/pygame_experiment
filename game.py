@@ -16,7 +16,7 @@ def main():
     drew = Drew([200, 500])
     allsprites = pygame.sprite.RenderPlain((drew))
     running = True
-    walk_values = [0, 0] # x and y origin is in top left
+    walk_values = {pygame.K_w: 0, pygame.K_a: 0, pygame.K_s: 0, pygame.K_d: 0}
     while running:
         clock.tick(60)
 
@@ -26,25 +26,11 @@ def main():
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 running = False
 
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_w:
-                walk_values[1] -= 10
+            elif event.type == pygame.KEYDOWN and event.key in walk_values.keys():
+                walk_values[event.key] = 10
 
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_d:
-                walk_values[0] += 10
-
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-                walk_values[1] += 10
-
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_a:
-                walk_values[0] -= 10
-
-
-            if event.type == pygame.KEYUP and (event.key == pygame.K_w or \
-                event.key == pygame.K_s):
-                walk_values[1] = 0
-            if event.type == pygame.KEYUP and (event.key == pygame.K_d or \
-                event.key == pygame.K_a):
-                walk_values[0] = 0
+            elif event.type == pygame.KEYUP and event.key in walk_values.keys():
+                walk_values[event.key] = 0
 
         drew.walk(walk_values)
 
