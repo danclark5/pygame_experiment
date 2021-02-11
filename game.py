@@ -32,7 +32,7 @@ def main():
             elif event.type == pygame.KEYUP and event.key in walk_values.keys():
                 walk_values[event.key] = 0
 
-        drew.walk(walk_values)
+        drew.walk(walk_values, [])
 
 
         allsprites.update()
